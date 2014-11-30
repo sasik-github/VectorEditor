@@ -3,6 +3,7 @@ package objects;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -14,6 +15,11 @@ import java.util.Random;
 import javax.swing.JButton;
 
 public class PointButton extends JButton implements SimpleShape {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	protected static final int RADIUSBUTTON = 5;
 
@@ -32,11 +38,10 @@ public class PointButton extends JButton implements SimpleShape {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Random random = new Random();
-				_point = new Point(random.nextInt(300), random.nextInt(200));
-				System.out.println("New point " + _point);
-				draw();
-
+				// Random random = new Random();
+				// _point = new Point(random.nextInt(300), random.nextInt(200));
+				// System.out.println("New point " + _point);
+				// draw();
 			}
 		});
 	}
@@ -51,5 +56,26 @@ public class PointButton extends JButton implements SimpleShape {
 		parent.add(this);
 		draw();
 	}
+
+	public void movePointButton(int x, int y) {
+		_point = new Point(x, y);
+		draw();
+	}
+
+	// @Override
+	// protected void paintComponent(Graphics g) {
+	// super.paintComponent(g);
+	// Dimension originalSize = super.getPreferredSize();
+	// int gap = (int) (originalSize.height * 0.2);
+	// int x = originalSize.width + gap;
+	// int y = gap;
+	// int diameter = originalSize.height - (gap * 2);
+	// Graphics2D g2d = (Graphics2D) g;
+	//
+	// g2d.setColor(Color.GREEN);
+	// g2d.drawOval(x, y, diameter, diameter);
+	//
+	// // g2d.dispose();
+	// }
 
 }

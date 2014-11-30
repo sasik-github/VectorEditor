@@ -14,6 +14,8 @@ public class VectorEditor {
 				new GUI();
 			}
 		});
+		
+//		new GUI();
 	}
 
 }
