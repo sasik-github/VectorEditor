@@ -49,59 +49,38 @@ public class DrawCanvas extends JPanel {
 
 		g2d.setRenderingHints(rh);
 
-		
-		
 		Rectangle r = getBounds();
-//		g2d.clearRect(0, 0, r.width, r.height);
-		
+		// g2d.clearRect(0, 0, r.width, r.height);
+
 		setBackground(Color.BLACK);
-	    
 
 		for (SimpleShape item : _listObjects) {
 			item.draw(g2d, this);
 		}
 
-//		g2d.dispose();
+		// g2d.dispose();
 
 	}
-	
-	
-
-//	@Override
-//	public void paint(Graphics g) {
-//		// TODO Auto-generated method stub
-//		super.paint(g);
-//		Graphics2D g2d = (Graphics2D) g;
-//
-//		RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
-//				RenderingHints.VALUE_ANTIALIAS_ON);
-//
-//		rh.put(RenderingHints.KEY_RENDERING,
-//				RenderingHints.VALUE_RENDER_QUALITY);
-//
-//		g2d.setRenderingHints(rh);
-//
-//		
-//		
-//		Rectangle r = getBounds();
-////		g2d.clearRect(0, 0, r.width, r.height);
-//		g2d.setBackground(Color.WHITE);
-//	    
-//
-//		for (SimpleShape item : _listObjects) {
-//			item.draw(g2d, this);
-//		}
-//
-////		g2d.dispose();
-//	}
-
 
 	public void addActionListener() {
 		this.addMouseListener(drawCanvasMouseListener);
-//		for (SimpleShape item : _listObjects) {
-//			item.addMouseListener(drawCanvasMouseListener);
-//		}
+		// for (SimpleShape item : _listObjects) {
+		// item.addMouseListener(drawCanvasMouseListener);
+		// }
 
+	}
+
+	public SimpleShape getShape(String _shapeName) {
+
+		return null;
+	}
+
+	public ArrayList<SimpleShape> get_listObjects() {
+		return _listObjects;
+	}
+
+	public void set_listObjects(ArrayList<SimpleShape> _listObjects) {
+		this._listObjects = _listObjects;
 	}
 
 }

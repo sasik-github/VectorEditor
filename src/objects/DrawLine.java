@@ -13,22 +13,21 @@ public class DrawLine implements SimpleShape {
 	protected PointButton _p1, _p2;
 
 	public DrawLine(Point pointStart, Point pointEnd) {
-		this._p1 = new PointButton(pointStart);
-		this._p2 = new PointButton(pointEnd);
+//		this._p1 = new PointButton(pointStart);
+//		this._p2 = new PointButton(pointEnd);
 	}
 
 	public DrawLine(int xStart, int yStart, int xEnd, int yEnd) {
-		_p1 = new PointButton(new Point(xStart, yStart));
-		_p2 = new PointButton(new Point(xEnd, yEnd));
+//		_p1 = new PointButton(new Point(xStart, yStart));
+//		_p2 = new PointButton(new Point(xEnd, yEnd));
 	}
 
-	public void draw(Graphics2D g, Container parent) {
-		parent.add(_p1);
-		parent.add(_p2);
-		parent.repaint();
-		g.setColor(Color.RED);
-		g.drawLine(_p1.getX(), _p1.getY(), _p2.getX(), _p2.getY());
-	}
+//	public void draw(Graphics2D g, Container parent) {
+//		parent.add(_p1);
+//		parent.add(_p2);
+//		g.setColor(Color.RED);
+//		g.drawLine(_p1.getX(), _p1.getY(), _p2.getX(), _p2.getY());
+//	}
 
 	public String getName() {
 		return _name;
@@ -39,6 +38,12 @@ public class DrawLine implements SimpleShape {
 		_p1.addMouseListener(mListener);
 		_p2.addMouseListener(mListener);
 
+	}
+
+	@Override
+	public void draw(Graphics2D g, Point point) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
