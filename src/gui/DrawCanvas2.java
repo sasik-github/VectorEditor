@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.ActionListener;
@@ -24,7 +26,7 @@ public class DrawCanvas2 extends JPanel implements MouseListener,
 
 	private static final long serialVersionUID = -378741836294196543L;
 
-	private static final int BOX = 50;
+	private static final int BOX = 15;
 
 	private GUI parent;
 
@@ -35,6 +37,8 @@ public class DrawCanvas2 extends JPanel implements MouseListener,
 	private SimpleShape m_defaultShape;
 
 	private ActionListener m_reusableActionListener;
+
+	private ShapeComponent m_selectedComponent;
 
 	public DrawCanvas2(GUI parent) {
 		this.parent = parent;
@@ -77,7 +81,10 @@ public class DrawCanvas2 extends JPanel implements MouseListener,
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
+		m_selectedComponent.setBounds(e.getX() - BOX / 2, e.getY() - m_selectedComponent.displacmentX, BOX,
+				BOX);
+		m_selectedComponent.repaint();
+		this.validate();
 
 	}
 
@@ -89,12 +96,23 @@ public class DrawCanvas2 extends JPanel implements MouseListener,
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-
+		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+		Point p = e.getPoint();
+		System.out.println("DrawCanvas2.mousePressed() Point = " + p);
+		p.y -= ShapeComponent.displacmentX;
+		// System.out.println("DrawCanvas2.mousePressed() Point  =" + p);
+		Component component = this.getComponentAt(p);
+		System.out.println("DrawCanvas2.mousePressed() " + component);
+		if (component instanceof ShapeComponent) {
+			m_selectedComponent = (ShapeComponent) component;
+			this.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+			this.addMouseMotionListener(this);
+			m_selectedComponent.repaint();
+		}
 
 	}
 
@@ -103,10 +121,19 @@ public class DrawCanvas2 extends JPanel implements MouseListener,
 		if (m_selected == null) {
 			return;
 		}
-		System.out.println("DrawCanvas2.mouseClicked()");
+		if (m_selectedComponent != null) {
+			this.removeMouseMotionListener(this);
+			this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			m_selectedComponent.setBounds(e.getX() - BOX / 2, e.getY() - m_selectedComponent.displacmentX,
+					BOX, BOX);
+			m_selectedComponent.repaint();
+			m_selectedComponent = null;
+			return;
+
+		}
 		if (this.contains(e.getX(), e.getY())) {
 			ShapeComponent sc = new ShapeComponent(this, m_selected);
-			sc.setBounds(e.getX() - BOX / 2, e.getY() - BOX / 2, BOX, BOX);
+			sc.setBounds(e.getX() - BOX / 2, e.getY() - sc.displacmentX, BOX, BOX);
 			add(sc, 0);
 			validate();
 			repaint(sc.getBounds());
